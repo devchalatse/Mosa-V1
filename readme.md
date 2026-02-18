@@ -7,8 +7,8 @@ Router -- Maps endpoint --> controller, where should this request go?
 
 
 
-Schema validates input
-    ↓
+Schema va
+    validates input
 Controller receives request
     ↓
 Service decides if allowed
