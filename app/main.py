@@ -1,14 +1,14 @@
 from fastapi import FastAPI
-from app.db.base import Base
-# from modules.users.router import router
-# from modules.user.router import router
-# from modules.users.router import router
+from db.database import engine
+from sqlalchemy import text
 
 app = FastAPI()
 
-# Create tables
-
-
-# Include routers
-# app.include_router(router)
-
+@app.on_event("startup")
+def check_db_connection():
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+            print("✅ Database connected successfully")
+    except Exception as e:
+        print(f"Database connection failed: {e}")
