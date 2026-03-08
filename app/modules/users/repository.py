@@ -13,6 +13,10 @@ class UserRepository:
     #Get user by id
     def get_user_id(self, user_id:int):
         return self.db.query(User).filter(User.id == user_id).first()
+
+    #Get email by email
+    def get_email_by_id(self, email:str):
+        return self.db.query(User).filter(User.email == self.get_email_by_id).first()
     
     #Create user and save the user
     def create(self, data:UserSignUp):

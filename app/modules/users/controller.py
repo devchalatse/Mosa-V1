@@ -13,10 +13,21 @@ class UserController:
     
     def get_one(self, user_id:int):
         try:
-            user = self.service.get_users_id(user_id)
+            user = self.service.get_user_id(user_id)
             return {"status":"success", "data":user}
         except ValueError as e:
             raise HTTPException(status_code=404, detail=str(e))
+    
+    def get_email_id(self, email:str):
+        try:
+            email = self.service.get_email_by_id(email) # type: ignore
+            return{"status":"success", "data": email}
+        except ValueError as e:
+            raise HTTPException(status_code=404, detail=str(e))
+        return {
+        "access_token": token,
+        "token_type": "bearer"
+    }
     
     def create(self, data:UserSignUp):
         try:
