@@ -21,16 +21,14 @@ class UserService:
         return user
 
     def login(self, email: str, password: str):
-        # 1. Find user by email
+        
         user = self.repo.get_user_by_email(email)
         if not user:
             raise ValueError("Invalid credentials")
 
-        # 2. Verify password
         if not verify_password(password, user.password):
             raise ValueError("Invalid credentials")
 
-        # 3. Create token
         token = create_access_token({
             "user_id": user.id,
             "email": user.email
