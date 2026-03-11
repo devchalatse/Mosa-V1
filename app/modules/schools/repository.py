@@ -21,3 +21,13 @@ class SchoolRepository:
         self.db.commit()
         self.db.refresh(school)   
         return school
+    
+    def delete(self, school_id:int):
+        school = self.db.query(Schools).filter(Schools.id == school_id).first()
+        if not school:
+            return None
+            self.db.delete(school)
+            self.db.commit()
+            return school
+        
+        

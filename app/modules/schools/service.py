@@ -24,8 +24,8 @@ class SchoolService:
     def create(self, data: SchoolCreate):
         return self.repo.create(data)
 
-    # def delete(self, school_id: int):
-    #     school = self.repo.get_school_by_id(school_id)
-    #     if not school:
-    #         raise ValueError("School not found")
-    #     return self.repo.delete(school_id)
+    def delete(self, school_id: int):
+        school = self.repo.get_school_by_id(school_id)
+        if not school:
+            raise ValueError("School not found")
+        return self.repo.delete(school_id) 
