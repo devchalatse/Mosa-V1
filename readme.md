@@ -106,8 +106,8 @@ cd Mosa-V1
 Create a virtual environment:
 
 ```
-python -m venv venv
-source venv/bin/activate
+python -m venv env
+source env/bin/activate
 ```
 
 Install dependencies:
