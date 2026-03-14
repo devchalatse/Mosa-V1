@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "sqlalchamy"
-    ]
+    ],
+    "python.REPL.enableREPLSmartSend": false
 }
