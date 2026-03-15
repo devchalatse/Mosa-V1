@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from db.database import engine
 from sqlalchemy import text
-from modules.users.router import router as users_router 
+from modules.users.router import router as users_router
+from modules.schools.router import router as schools_router
+from modules.schools.models import Base 
 from modules.users.models import Base
 
 app = FastAPI()
@@ -17,4 +19,5 @@ def check_db_connection():
 
 Base.metadata.create_all(bind=engine)
 
-app.include_router(users_router) 
+app.include_router(users_router)
+app.include_router(schools_router)

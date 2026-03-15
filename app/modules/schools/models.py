@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Integer
-from app.db.database import Base
+from db.database import Base
 
 class Schools(Base):
     __tablename__ = "schools"  

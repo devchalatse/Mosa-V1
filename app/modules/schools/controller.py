@@ -31,5 +31,14 @@ class schoolController:
             return{"status":"success", "data": create_data}
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))
+    
+    def delete(self, school_id:int):
+        try:
+            delete = self.service.delete(school_id)
+            return {"status":"success", "data":self.delete}
+        except ValueError as e:
+            raise HTTPException(status_code=401, detail=str(e))
+        
+        
         
     
