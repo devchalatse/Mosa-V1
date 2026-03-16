@@ -10,13 +10,13 @@ class ServiceSchools:
         return self.repo.get_schools()
 
     def get_school_by_id(self, school_id: int):
-        school = self.repo.get_school_id(school_id)
+        school = self.repo.get_school_by_id(school_id)
         if not school:
             raise ValueError("School not found")
         return school  
 
-    def get_schools_email(self, email_id: str):
-        email = self.repo.get_email_id(email_id)
+    def get_school_by_email(self, email_id: str):
+        email = self.repo.get_email_by_id(email_id)
         if not email:
             raise ValueError("Email not found")
         return email
@@ -25,7 +25,7 @@ class ServiceSchools:
         return self.repo.create_school(data)
 
     def delete(self, school_id: int):
-        delete_id = self.repo.get_school_id(school_id)
-        if not delete_id:
+        delete_school = self.repo.get_school_by_id(school_id)
+        if not delete_school:
             raise ValueError("Invalid school details")
         return self.repo.delete(school_id)

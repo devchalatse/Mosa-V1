@@ -20,7 +20,7 @@ class schoolController:
         
     def get_email_id(self, email_id:str):
         try:
-            email = self.service.get_schools_email(email_id)
+            email = self.service.get_school_by_email(email_id)
             return {"status":"success", "data":email}
         except ValueError as e:
             raise HTTPException(status_code=401, detail=str(e))
@@ -39,6 +39,6 @@ class schoolController:
         except ValueError as e:
             raise HTTPException(status_code=401, detail=str(e))
         
-        
+
         
     

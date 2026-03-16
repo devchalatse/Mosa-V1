@@ -7,13 +7,13 @@ class RepositorySchools:
         self.db = db
 
     def get_schools(self):
-        self.db.query(Schools).all
+        self.db.query(Schools).all()
     
-    def get_school_id(self, school_id:int):
-        self.db.query(Schools).filter(Schools.id == school_id).first()
+    def get_school_by_id(self, school_id:int):
+        return self.db.query(Schools).filter(Schools.id == school_id).first() 
     
-    def get_email_id(self, email_id:str):
-        self.db.query(Schools).filter(Schools.email == email_id).first()
+    def get_email_by_id(self, email_id:str):
+        return self.db.query(Schools).filter(Schools.email == email_id).first()
 
     def create_school(self, data:SchoolCreate):
         school_data = Schools(**data.model_dump())
@@ -22,11 +22,10 @@ class RepositorySchools:
         self.db.refresh(school_data)
         return school_data
     
-    def delete(self, school_delete:int):
-        delete_school = self.db.query(Schools).filter(Schools.id == school_delete).first()
-        if not delete_school:
+    def delete(self, school_id:int):
+        school = self.db.query(Schools).filter(Schools.id == school_id).first()
+        if not school:
             return None
+        self.db.delete(school)
         self.db.commit()
-        self.db.delete(delete_school)
-
-        return delete_school
+        return school

@@ -18,6 +18,10 @@ def get_school_id(school_id:int, db: Session = Depends(get_db)):
 def create_school (data:SchoolCreate, db: Session = Depends(get_db)):
     return schoolController(db).create(data)
 
+@router.get('/{email_id}')
+def get_school_by_email(email_id:str, db: Session = Depends(get_db)):
+    return schoolController(db).get_email_id(email_id)
+
 @router.delete('/{school_id}')
 def delete(school_id:int, db: Session =Depends(get_db)):
     return schoolController(db).delete(school_id)
