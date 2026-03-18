@@ -8,4 +8,4 @@ class SchoolItems(Base):
     category = Column(String, nullable=False)
     quantity = Column(Integer, nullable=False)
     school_id = Column(Integer, ForeignKey=("school_id"), unique=True)
-    
+

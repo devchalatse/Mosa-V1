@@ -8,6 +8,11 @@ from modules.users.models import Base
 
 app = FastAPI()
 
+@app.get("/")                   
+def root():
+    return {"message": "Mosa API is running 🚀", "docs": "/docs"}
+
+
 @app.on_event("startup")
 def check_db_connection():
     try:

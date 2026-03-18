@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class SchoolItems(BaseModel):
+class Items(BaseModel):
     name:str
     quantity:int
     category:str
