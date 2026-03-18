@@ -14,7 +14,7 @@ def get_all_items(db: Session = Depends(get_db)):
 def get_item_by_id(item_id: int, db:Session = Depends(get_db)):
     return ControllerItems(db).get_items_by_id(item_id)
 
-@router.post("/items")
+@router.post("/")
 def create(data:Items, db:Session = Depends(get_db)):
     return ControllerItems(db).create_item(data)
 
