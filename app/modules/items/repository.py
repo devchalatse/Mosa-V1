@@ -22,10 +22,10 @@ class RepositoryItems:
         self.db.refresh(items)
         return items
     
-    def delete_items(self, delete_id:int):
+    def delete(self, delete_id:int):
         item = self.db.query(Items).filter(SchoolItems.id == delete_id).first()
         if not item:
             return None
         self.db.delete(item)
         self.db.commit()
-        
+
