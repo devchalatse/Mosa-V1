@@ -12,7 +12,7 @@ app = FastAPI()
 
 @app.get("/")                   
 def root():
-    return {"message": "Mosa API is running 🚀", "docs": "/docs"}
+    return {"message": "MOSA-V1 is UP "}
 
 
 @app.on_event("startup")

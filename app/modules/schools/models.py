@@ -9,3 +9,5 @@ class Schools(Base):
     phone_number = Column(String, unique=True, nullable=False)  
     items = Column(String)
     location = Column(String, nullable=False)
+
+    
