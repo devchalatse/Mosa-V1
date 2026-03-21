@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from db.database import engine
 from sqlalchemy import text
+from modules.donations import models
 from modules.users.router import router as users_router
 from modules.schools.router import router as schools_router
 from modules.schools.models import Base 
