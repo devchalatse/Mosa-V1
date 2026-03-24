@@ -1,4 +1,5 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Enum
+from sqlalchemy import String, Integer, ForeignKey, Enum
+from sqlalchemy.orm import Mapped, mapped_column
 from db.database import Base
 import enum
 
@@ -12,8 +13,8 @@ class CategoryEnum(str, enum.Enum):
 
 class SchoolItems(Base):
     __tablename__ = "items"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    category = Column(Enum(CategoryEnum), nullable=False)
-    quantity = Column(Integer, nullable=False)
-    school_id = Column(Integer, ForeignKey("schools.id"), nullable=False)
+    id:Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    name:Mapped[str]= mapped_column(String, nullable=False)
+    category:Mapped[int]= mapped_column(Enum(CategoryEnum), nullable=False)
+    quantity:Mapped[int] = mapped_column(Integer, nullable=False)
+    school_id:Mapped[int] = mapped_column(Integer, ForeignKey("schools.id"), nullable=False)

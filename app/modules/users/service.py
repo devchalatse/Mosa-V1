@@ -4,6 +4,7 @@ from .repository import UserRepository
 from passlib.context import CryptContext
 from utils.jwt_handler import create_access_token
 from utils.security import verify_password
+from utils.email import send_welcome_email  
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -21,7 +22,6 @@ class UserService:
         return user
 
     def login(self, email: str, password: str):
-        
         user = self.repo.get_user_by_email(email)
         if not user:
             raise ValueError("Invalid credentials")
@@ -36,7 +36,15 @@ class UserService:
 
         return {"access_token": token, "token_type": "bearer"}
 
-    def create(self, data: UserSignUp):
+    def create(self, data: UserSignUp):  # 👈 one create method only
+        # hash password
         truncated_password = data.password.encode("utf-8")[:72].decode("utf-8", errors="ignore")
         data.password = pwd_context.hash(truncated_password)
-        return self.repo.create(data)
+
+        # create user
+        user = self.repo.create(data)
+
+        # send welcome email
+        send_welcome_email(user.email, user.fullname) 
+
+        return user
