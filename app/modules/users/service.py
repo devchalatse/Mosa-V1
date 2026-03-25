@@ -35,16 +35,17 @@ class UserService:
         })
 
         return {"access_token": token, "token_type": "bearer"}
+    
+    def create(self, data: UserSignUp):
+        existing = self.repo.get_user_by_email(data.email)
+        if existing:
+            raise ValueError("Email already registered")
 
-    def create(self, data: UserSignUp):  # 👈 one create method only
-        # hash password
         truncated_password = data.password.encode("utf-8")[:72].decode("utf-8", errors="ignore")
         data.password = pwd_context.hash(truncated_password)
 
-        # create user
         user = self.repo.create(data)
-
-        # send welcome email
-        send_welcome_email(user.email, user.fullname) 
+        send_welcome_email(user.email, user.fullname)
 
         return user
+    

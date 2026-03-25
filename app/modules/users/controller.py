@@ -27,7 +27,7 @@ class UserController:
     
     def create(self, data: UserSignUp):
         try:
-            createUser = self.service.create(data)
+            createUser = self.service.create(data) 
             return {"status": "success", "data": createUser}
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))

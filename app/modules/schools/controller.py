@@ -18,10 +18,10 @@ class schoolController:
         except ValueError as e:
             raise HTTPException(status_code=401,detail=str(e))
         
-    def get_email_id(self, email_id:str):
+    def get_email_id(self, email:str):
         try:
-            email = self.service.get_school_by_email(email_id)
-            return {"status":"success", "data":email}
+            emails = self.service.get_school_by_email(email)
+            return {"status":"success", "data":emails}
         except ValueError as e:
             raise HTTPException(status_code=401, detail=str(e))
     
@@ -38,6 +38,24 @@ class schoolController:
             return {"status":"success", "data":self.delete}
         except ValueError as e:
             raise HTTPException(status_code=401, detail=str(e))
+        
+    def get_nearby_school(self, lat: float, lng: float, radius: float = 10):
+        try:
+            nearby = self.service.get_nearby_schools(lat, lng, radius)
+            return{"status":"success", "data": nearby}
+        except ValueError as e:
+            raise HTTPException(status_code=401, detail=str(e))
+        
+    def verify_school(self, school_id:int):
+        try:
+            verify = self.service.verify_school(school_id)
+            return {"status":"success", "data": verify}
+        except ValueError as e:
+            raise HTTPException(status_code=401, detail=str(e))
+        
+    
+    
+    
         
 
         
