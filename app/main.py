@@ -9,7 +9,9 @@ from modules.users.models import Base
 from modules.items.models import Base
 from modules.items.router import router as items_router
 from modules.donations.router import router as donation_router
+from modules.drivers.router import router as drivers_router
 from modules.donations.models import Base
+from modules.drivers.models import Base
 
 
 app = FastAPI()
@@ -34,4 +36,4 @@ app.include_router(users_router)
 app.include_router(schools_router)
 app.include_router(items_router)
 app.include_router(donation_router)
-
+app.include_router(drivers_router)
