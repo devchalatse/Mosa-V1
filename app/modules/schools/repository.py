@@ -1,8 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from datetime import datetime
-from .models import Schools  # your schools table
-
+from .models import School  # your schools table
 
 class RepositorySchools:
     def __init__(self, db: Session):
@@ -10,19 +9,19 @@ class RepositorySchools:
 
     #  GET ALL
     def get_schools(self):
-        return self.db.query(Schools).all()
+        return self.db.query(School).all()
 
     #  GET BY ID
     def get_school_by_id(self, school_id: int):
-        return self.db.query(Schools).filter(Schools.id == school_id).first()
+        return self.db.query(School).filter(School.id == school_id).first()
 
     #  GET BY EMAIL
     def get_school_by_email(self, email: str):
-        return self.db.query(Schools).filter(Schools.email == email).first()
+        return self.db.query(School).filter(School.email == email).first()
 
     #  CREATE
     def create_school(self, data):
-        school = Schools(**data.dict())
+        school = School(**data.dict())
         self.db.add(school)
         self.db.commit()
         self.db.refresh(school)
@@ -52,7 +51,7 @@ class RepositorySchools:
         return school
 
     # AUTO VERIFY (EMIS MATCH)
-    def match_school_by_emis(self, emis_number: str):
+    def match_school_by_emis(self, emis_number: int):
         query = text("""
             SELECT * FROM government_schools
             WHERE emis_number = :emis

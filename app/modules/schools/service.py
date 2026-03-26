@@ -31,7 +31,7 @@ class ServiceSchools:
     def create(self, data: SchoolCreate):
         school = self.repo.create_school(data)
 
-        # TODO: uncomment once government_schools table is populated
+        #TODO uncomment once government_schools table is populated
         # if school.emis_number:
         #     gov_school = self.repo.match_school_by_emis(school.emis_number)
         #     if gov_school:

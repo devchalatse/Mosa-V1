@@ -32,7 +32,7 @@ class SchoolResponse(BaseModel):
 
     emis_number: Optional[str]
 
-    # PDF fields
+    # PDF fields/ Form inputs
     school_phase: Optional[str]
     education_district: Optional[str]
     quintile: Optional[int]
