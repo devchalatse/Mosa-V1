@@ -1,7 +1,6 @@
 from .model import dashboard
 from pydantic import BaseModel
 
-
 class createDashboard(BaseModel):
     user_id:int
     school_id:int

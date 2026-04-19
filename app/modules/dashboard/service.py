@@ -10,6 +10,12 @@ class dashboardService:
     def get_all_dashboard(self):
         return self.repo.get_all_user_dashboard()
     
+    def get_dashboard_by_id(self, dashboard_id:int):
+        dashboard = self.get_dashboard_by_id(dashboard_id)
+        if not dashboard:
+            raise ValueError("Dashboard not found")
+        return dashboard
+    
     def get_dashboard_by_school(self, school_id:int):
         School = self.repo.get_dashboard_school(school_id)
         if not School:
