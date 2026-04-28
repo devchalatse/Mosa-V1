@@ -1,4 +1,5 @@
-from .model import dashboard
+
+from .models import Dashboard
 from .schema import createDashboard
 from sqlalchemy.orm import Session
 from .repository import dashboardRepository
@@ -43,7 +44,13 @@ class dashboardService:
     def create_dashboard(self, data: createDashboard):
         return self.repo.create_dashboard(data)
     
+    def delete_dashboard(self, donation_id:int):
+        user = self.repo.delete(donation_id)
+        
+
+
     
+
     
 
     

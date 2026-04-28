@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from .model import dashboard
+from .models import Dashboard
 from .schema import createDashboard
 
 
@@ -8,36 +8,36 @@ class dashboardRepository:
         self.db = db
 
     def get_all_user_dashboard(self):
-        return self.db.query(dashboard).all()
+        return self.db.query(Dashboard).all()
     
     def get_dashboard_by_id(self, dashboard_id:int):
-        return self.db.query(dashboard).filter(dashboard.id == dashboard_id).first()
+        return self.db.query(Dashboard).filter(Dashboard.id == dashboard_id).first()
     
     def get_dashboard_by_users(self, user_id:int):
-        return self.db.query(dashboard).filter(dashboard.user_id == user_id).all()
+        return self.db.query(Dashboard).filter(Dashboard.user_id == user_id).all()
     
     def get_dashboard_by_items(self, items_id:int):
-        return self.db.query(dashboard).filter(dashboard.items_id == items_id).all()
+        return self.db.query(Dashboard).filter(Dashboard.items_id == items_id).all()
     
     def get_dashboard_by_donation(self, donation_id:int):
-        return self.db.query(dashboard).filter(dashboard.donation_id == donation_id).all()
+        return self.db.query(Dashboard).filter(Dashboard.donation_id == donation_id).all()
     
     def get_dashboard_school(self, school_id:int):
-        return self.db.query(dashboard).filter(dashboard.school_id == school_id).all()
+        return self.db.query(Dashboard).filter(Dashboard.school_id == school_id).all()
     
     def create_dashboard(self, data:createDashboard):
-        Dashboard = dashboard(**data.model_dump())
-        self.db.add(dashboard)
+        Dashboard = Dashboard(**data.model_dump())
+        self.db.add(Dashboard)
         self.db.commit()
-        self.db.refresh(dashboard)
+        self.db.refresh(Dashboard)
         return Dashboard
     
     def delete(self, dashboard_id:int):
-        Dashboard = self.db.query(dashboard).filter(dashboard.donation_id == dashboard_id).first()
+        Dashboard = self.db.query(Dashboard).filter(Dashboard.donation_id == dashboard_id).first()
         if not Dashboard:
             return None
-        self.db.delete(dashboard)
+        self.db.delete(Dashboard)
         self.db.commit()
-        self.db.refresh(dashboard)
+        self.db.refresh(Dashboard)
         return Dashboard
     

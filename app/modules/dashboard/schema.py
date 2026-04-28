@@ -1,4 +1,4 @@
-from .model import dashboard
+from .models import Dashboard
 from pydantic import BaseModel
 
 class createDashboard(BaseModel):

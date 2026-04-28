@@ -1,18 +1,25 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
-from .model import dashboard
+from .models import Dashboard
 from .schema import createDashboard
 from .service import dashboardService
 
 class dashboardController:
     def __init__(self, db:Session):
         self.service = dashboardService(db)
-
+    
     def get_all_dashboard(self):
         dashboard = self.service.get_all_dashboard()
         return {"status":"success", "data": dashboard}
     
-    def get_dashboard_by_userid(self, user_id:int):
+    def get_dashboard_by_id(self, dashboard_id:int):
+        try:
+            dashboardUser = self.service.get_dashboard_by_id(dashboard_id)
+            return {"status":"success", "data": dashboard_id}
+        except ValueError as e:
+            raise HTTPException(status_code=401, detail=str(e))
+        
+    def get_dashboard_by_user(self, user_id:int):
         try:
             user = self.service.get_dashboard_by_users(user_id)
             return {"status":"success", "data": user_id}
@@ -47,7 +54,16 @@ class dashboardController:
         except ValueError as e:
             raise HTTPException(status_code=401, detail=str(e))
 
-    
+    def delete_dashboard(self, dashboard_id:int):
+        try:
+            delete_dashboard = self.service.delete_dashboard(dashboard_id)
+            return {"status":"success", "data":delete_dashboard}
+        except ValueError as e:
+            raise HTTPException(status_code=401, detail=str(e))
+        
+        
+
+        
         
     
     
