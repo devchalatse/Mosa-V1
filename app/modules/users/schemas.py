@@ -4,6 +4,7 @@ class UserSignUp(BaseModel):
     fullname: str
     email: EmailStr
     password: str
+    role:str = "user"
 
     @field_validator("password")
     @classmethod
