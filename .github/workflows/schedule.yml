@@ -1,0 +1,64 @@
+name: Mosa Backend Scheduled Jobs
+
+on:
+  schedule:
+    # Daily job at 02:00 UTC
+    - cron: "0 2 * * *"
+
+    # Weekly job every Sunday at 01:00 UTC
+    - cron: "0 1 * * 0"
+
+  workflow_dispatch:
+
+jobs:
+  daily_tasks:
+    name: Run Daily Backend Jobs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run database migrations
+        run: |
+          alembic upgrade head
+
+      - name: Update dashboard analytics
+        run: |
+          python scripts/update_dashboard_metrics.py
+
+      - name: Clean expired sessions
+        run: |
+          python scripts/cleanup_sessions.py
+
+
+  weekly_tasks:
+    name: Run Weekly Analytics
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 1 * * 0'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Generate weekly metrics
+        run: |
+          python scripts/weekly_report.py
