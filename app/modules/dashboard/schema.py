@@ -1,16 +1,11 @@
-from .models import Dashboard
 from pydantic import BaseModel
+from .models import Dashboard
 
-class createDashboard(BaseModel):
-    user_id:int
-    school_id:int
-    donation_id:int
-    items_id:int
-    
 class DashboardResponse(BaseModel):
-    user_id:int
-    school_id:int
-    donation_id:int
+    total_users:int
+    total_schools:int
+    total_items:int
+    total_donations:int
+    new_users:int
 
-    class config:
-        from_attributes = True
+
