@@ -2,32 +2,32 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 from datetime import date
 
-from users.models import User
-from items.models import SchoolItems
-from schools.models import School
-from donations.models import Donation
+from modules.users.models import User
+from modules.items.models import SchoolItems
+from modules.schools.models import School
+from modules.donations.models import Donation
 
-class Dashboard:
-    def __init__(self, db:Session):
+class DashboardRepository:
+    def __init__(self, db: Session):
         self.db = db
 
-    def total_users(self):
-        return self.db.query(func.count(User.id)).scalar()
+    def total_users(self) -> int:
+        return self.db.query(func.count(User.id)).scalar() or 0
     
-    def total_items(self):
-        return self.db.query(func.count(SchoolItems.id)).scalar()
+    def total_items(self) -> int:
+        return self.db.query(func.count(SchoolItems.id)).scalar() or 0
     
-    def total_schools(self):
-        return self.db.query(func.count(School.id)).scalar()
+    def total_schools(self) -> int:
+        return self.db.query(func.count(School.id)).scalar() or 0
     
-    def total_donations(self):
-        return self.db.query(func.count(Donation.id)).scalar()
+    def total_donations(self) -> int:
+        return self.db.query(func.count(Donation.id)).scalar() or 0
     
-    def new_users_today(self):
+    def new_users_today(self) -> int:
         today = date.today()
-
         return (
             self.db.query(func.count(User.id))
-            .filter(func.date(User.created_at) == today)
-            .scalar()
+            # 💡 Replace 'date_joined' with your actual User model field name
+            .filter(func.date(User.date_joined) == today) 
+            .scalar() or 0
         )

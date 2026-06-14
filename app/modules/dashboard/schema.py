@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from .models import Dashboard
+from .models import DashboardModel
 
 class DashboardResponse(BaseModel):
     total_users:int

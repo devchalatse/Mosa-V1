@@ -1,10 +1,10 @@
-from .repository import Dashboard
-
+from .repository import DashboardRepository
+from sqlalchemy.orm import Session
 
 class DashboardService:
 
-    def __init__(self, repo: Dashboard):
-        self.repo = repo
+    def __init__(self, db: Session):
+        self.repo = DashboardRepository(db)
 
 
     def get_dashboard(self):
@@ -16,3 +16,4 @@ class DashboardService:
             "total_donations": self.repo.total_donations(),
             "new_users_today": self.repo.new_users_today()
         }
+    
