@@ -1,7 +1,7 @@
 from sqlalchemy import String, Integer, ForeignKey, Enum, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.sql import func
-from db.database import Base
+from app.db.database import Base
 import enum
 
 class DonationStatus(str, enum.Enum):

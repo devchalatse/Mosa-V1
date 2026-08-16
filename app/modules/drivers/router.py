@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
 from sqlalchemy.orm import Session
-from db.dependencies import get_db
+from app.db.dependencies import get_db
 from .controller import DriverController
 from .schemas import DriverCreate, DriverLocationUpdate
 from typing import Dict

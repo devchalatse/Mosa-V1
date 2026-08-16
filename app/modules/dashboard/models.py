@@ -1,7 +1,7 @@
 from sqlalchemy import Integer, DateTime
 from sqlalchemy.orm import mapped_column, Mapped
 from datetime import datetime
-from db.database import Base
+from app.db.database import Base
 
 class DashboardModel(Base):  # Renamed to DashboardModel to avoid conflicts with your repository class
     __tablename__ = "dashboard"  # Fixed: exactly two underscores on each side

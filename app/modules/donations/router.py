@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from db.dependencies import get_db
+from app.db.dependencies import get_db
 from .controller import DonationController
 from .schemas import DonationCreate, DonationStatusUpdate
 from .models import DonationStatus

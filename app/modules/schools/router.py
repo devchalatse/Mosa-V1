@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from db.dependencies import get_db
+from app.db.dependencies import get_db
 from sqlalchemy.orm import Session
 from .schemas import SchoolCreate, SchoolResponse
 from .controller import schoolController

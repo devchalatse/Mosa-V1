@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: mosa-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mosa
+      POSTGRES_PASSWORD: mosa_password
+      POSTGRES_DB: mosa_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -2,10 +2,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 from datetime import date
 
-from modules.users.models import User
-from modules.items.models import SchoolItems
-from modules.schools.models import School
-from modules.donations.models import Donation
+from app.modules.users.models import User
+from app.modules.items.models import SchoolItems
+from app.modules.schools.models import School
+from app.modules.donations.models import Donation
 
 class DashboardRepository:
     def __init__(self, db: Session):

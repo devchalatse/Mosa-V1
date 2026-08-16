@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from .schemas import SchoolCreate
 from .repository import RepositorySchools
-from utils.email import send_school_verification_email
-from utils.jwt_handler import create_access_token
+from app.utils.email import send_school_verification_email
+from app.utils.jwt_handler import create_access_token
 
 
 class ServiceSchools:

@@ -1,6 +1,6 @@
 from sqlalchemy import String, Integer, ForeignKey, Enum
 from sqlalchemy.orm import Mapped, mapped_column
-from db.database import Base
+from app.db.database import Base
 import enum
 
 class CategoryEnum(str, enum.Enum):

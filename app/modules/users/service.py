@@ -2,9 +2,9 @@ from sqlalchemy.orm import Session
 from .schemas import UserSignUp
 from .repository import UserRepository
 from passlib.context import CryptContext
-from utils.jwt_handler import create_access_token
-from utils.security import verify_password
-from utils.email import send_welcome_email  
+from app.utils.jwt_handler import create_access_token
+from app.utils.security import verify_password
+from app.utils.email import send_welcome_email  
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

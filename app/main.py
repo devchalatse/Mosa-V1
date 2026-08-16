@@ -1,23 +1,23 @@
 from fastapi import FastAPI
 from sqlalchemy import text
 
-from db.database import engine, Base
+from app.db.database import engine, Base
 
 # Import models so SQLAlchemy registers them
-from modules.users import models
-from modules.schools import models
-from modules.items import models
-from modules.donations import models
-from modules.drivers import models
-from modules.dashboard import models
+from app.modules.users import models
+from app.modules.schools import models
+from app.modules.items import models
+from app.modules.donations import models
+from app.modules.drivers import models
+from app.modules.dashboard import models
 
 # Routers
-from modules.users.router import router as users_router
-from modules.schools.router import router as schools_router
-from modules.items.router import router as items_router
-from modules.donations.router import router as donation_router
-from modules.drivers.router import router as drivers_router
-from modules.dashboard.router import router as dashboard_router
+from app.modules.users.router import router as users_router
+from app.modules.schools.router import router as schools_router
+from app.modules.items.router import router as items_router
+from app.modules.donations.router import router as donation_router
+from app.modules.drivers.router import router as drivers_router
+from app.modules.dashboard.router import router as dashboard_router
 
 app = FastAPI()
 
