@@ -9,7 +9,7 @@ resend.api_key = os.getenv("RESEND_API_KEY")
 
 def send_welcome_email(to_email: str, fullname: str):
     resend.Emails.send({
-        "from": "Mosa <onboarding@resend.dev>",
+        "from": "Mosa <MosaV1@resend.dev>",
         "to": "chalatsethabo@gmail.com",
         "subject": "Welcome to Mosa!",
         "html": f"""
