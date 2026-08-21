@@ -9,3 +9,4 @@ passlib
 pytest
 pytest-cov
 httpx
+jwt
