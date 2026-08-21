@@ -1,0 +1,75 @@
+name: Mosa CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Verify Python
+        run: |
+          python --version
+          python -m pip --version
+
+      - name: Verify requirements
+        run: |
+          echo "Current directory:"
+          pwd
+
+          echo "Git commit:"
+          git rev-parse HEAD
+
+          echo "requirements.txt:"
+          cat requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Verify application import
+        env:
+          PYTHONPATH: .
+        run: |
+          python -c "from app.main import app; print('Application import successful')"
+
+      - name: Start FastAPI server
+        env:
+          PYTHONPATH: .
+        run: |
+          uvicorn app.main:app \
+            --host 127.0.0.1 \
+            --port 8000 > server.log 2>&1 &
+
+          echo $! > server.pid
+
+          sleep 10
+
+      - name: Check server
+        run: |
+          cat server.log
+          curl --fail http://127.0.0.1:8000/ || exit 1
+
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill "$(cat server.pid)" || true
+          fi
