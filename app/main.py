@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from sqlalchemy import text
 
 from app.db.database import engine, Base
+# from app.db.database import engine, Base
 # Import models so SQLAlchemy registers them
 
 from app.modules.users import models
