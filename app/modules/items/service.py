@@ -22,7 +22,7 @@ class ServiceItems:
         return category
     
     def create_items(self, data:Items):
-        create = self.repo.create_items(data)
+        return self.repo.create_items(data)
     
     def delete(self, item_id:int):
         item = self.repo.get_item_by_id(item_id)

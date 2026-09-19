@@ -7,6 +7,7 @@ from app.modules.items import models
 from app.modules.donations import models
 from app.modules.drivers import models
 from app.modules.dashboard import models
+from app.modules.notifications import models
 from app.core.logging import setup_logging
 import logging
 setup_logging()
@@ -20,6 +21,8 @@ from app.modules.items.router import router as items_router
 from app.modules.donations.router import router as donation_router
 from app.modules.drivers.router import router as drivers_router
 from app.modules.dashboard.router import router as dashboard_router
+from app.modules.notifications.router import router as notification_router
+
 
 app = FastAPI()
 
@@ -54,3 +57,4 @@ app.include_router(items_router)
 app.include_router(donation_router)
 app.include_router(drivers_router)
 app.include_router(dashboard_router)
+app.include_router(notification_router)

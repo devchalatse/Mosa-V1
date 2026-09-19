@@ -19,4 +19,16 @@ class controllerNotification:
         except ValueError as e:
             raise HTTPException(status_code=401, detail=str(e))
 
+    def create_notification(self, data:NotificationCreate):
+        try:
+            not3 = self.create_notification(data)
+        except ValueError as e:
+            raise HTTPException(status_code=404, detail=str(e))
+
+    def delete_notification(self, delete_id:int):
+        try:
+            not4 = self.delete_notification(delete_id)
+        except ValueError as e:
+            raise HTTPException(status_code=404, detail=str(e))
+
     
