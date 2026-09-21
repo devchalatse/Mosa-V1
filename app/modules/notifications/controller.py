@@ -4,7 +4,7 @@ from .service import NotificationService
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
-class controllerNotification:
+class NotificationController:
     def __init__(self, db:Session):
         self.service = NotificationService(db)
 

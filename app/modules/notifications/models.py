@@ -1,40 +1,24 @@
-from sqlalchemy import Integer, String
-from sqlalchemy.orm import mapped_column, Mapped
-from sqlalchemy import DateTime, Boolean
-from datetime import datetime, timezone
+from sqlalchemy import Integer, ForeignKey, Enum, String, DateTime
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.sql import func
 from app.db.database import Base
+import enum
+
+
+class NotificationStatus(str, enum.Enum):
+    PENDING = "pending"
+    CONFIRMED = "confirmed"
+    CANCELLED = "cancelled"
 
 class Notification(Base):
-    __tablename__ = "notifications"
+    __tablename___ = "notification"
 
-    id:Mapped[int] = mapped_column(
-        Integer,
-        primary_key=True, 
-        index=True
-    )
+    id:Mapped[int]=mapped_column(Integer, primary_key=True, index=True)
+    driver_id:Mapped[int]=mapped_column(Integer, ForeignKey("driver.id"), nullable=False)
+    item_id:Mapped[int]=mapped_column(Integer, ForeignKey("item.id"), nullable=False)
+    school_id:Mapped[int]=mapped_column(Integer, ForeignKey("school.id"), nullable=False)
+    user_id:Mapped[int]=mapped_column(Integer,ForeignKey("user.id"), nullable=False)
+    quantity:Mapped[int] = mapped_column(Integer, nullable=False)
+    
 
-    recipient_id:Mapped[int] = mapped_column(
-        Integer,
-        nullable=False
-    )
-
-    message:Mapped[str] = mapped_column(
-        String(255),
-        nullable=False
-    )
-
-    title:Mapped[String] = mapped_column(
-        String,
-        nullable=False
-    )
-
-    is_read:Mapped[bool] = mapped_column(
-        Boolean,
-        default=False,
-        nullable=False,
-    )
-
-    date_created:Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc)
-    )
+    
