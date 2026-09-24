@@ -1,25 +1,25 @@
-from datetime import datetime
+from pydantic import BaseModel
+from .models import Notification, NotificationStatus
 
-from pydantic import BaseModel, ConfigDict
+class NotificationCreate(BaseModel):
+    driver_id: int
+    school_id: int
+    item_id: int
+    user_id: int
+    quantity: int
 
-
-class NotificationBase(BaseModel):
-    title: str
-    message: str
-
-
-class NotificationCreate(NotificationBase):
-    recipient_id: int
-
-
-class NotificationResponse(NotificationBase):
+class NotificationResponse(BaseModel):
     id: int
-    recipient_id: int
-    is_read: bool
-    created_at: datetime
+    driver_id: int
+    school_id: int
+    item_id: int
+    user_id: int
+    status: int
 
-    model_config = ConfigDict(from_attributes=True)
+    class Config:
+        from_attribute=True
 
+class NotificationUpdateStatus(BaseModel):
+    status:NotificationStatus
 
-class NotificationReadUpdate(BaseModel):
-    is_read: bool
+    
