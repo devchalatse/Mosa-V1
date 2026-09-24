@@ -27,7 +27,6 @@ class DashboardRepository:
         today = date.today()
         return (
             self.db.query(func.count(User.id))
-            # Replace 'date_joined' with your actual User model field name
             .filter(func.date(User.date_joined) == today) 
             .scalar() or 0
         )
